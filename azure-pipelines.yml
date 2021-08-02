@@ -27,12 +27,13 @@ steps:
       # scripted
       echo 'merge site'
       mv $(build.sourcesDirectory)/space-invaders/index.html $(build.sourcesDirectory)/space-invaders/space.html
-      cp -r $(build.sourcesDirectory)/space-invaders/. $(build.sourcesDirectory)/cv/. $(Build.ArtifactStagingDirectory)
+      cp -r $(build.sourcesDirectory)/space-invaders/. $(build.sourcesDirectory)/cv/. $(build.sourcesDirectory)
+      ls $(build.sourcesDirectory)
 
 - task: UniversalPackages@0
   inputs:
     command: 'publish'
-    publishDirectory: '$(Build.ArtifactStagingDirectory)'
+    publishDirectory: '$(Build.ArtifactStagingDirectory)/.'
     feedsToUsePublish: 'internal'
     vstsFeedPublish: '1f99d44f-ae24-4ec7-b6dc-5d544f9d8d16'
     vstsFeedPackagePublish: 'cvw'
