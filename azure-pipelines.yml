@@ -27,7 +27,7 @@ steps:
       # scripted
       echo 'merge site'
       mv $(build.sourcesDirectory)/space-invaders/index.html $(build.sourcesDirectory)/space-invaders/space.html
-      mv $(build.sourcesDirectory)/space-invaders/. $(build.sourcesDirectory)/cv/. $(Build.ArtifactStagingDirectory)
+      cp -r $(build.sourcesDirectory)/space-invaders/. $(build.sourcesDirectory)/cv/. $(Build.ArtifactStagingDirectory)
       ls $(Build.ArtifactStagingDirectory)
 
 - task: UniversalPackages@0
