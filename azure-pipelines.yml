@@ -34,4 +34,3 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'cvw'
     publishLocation: 'Container'
-    StoreAsTar: true
