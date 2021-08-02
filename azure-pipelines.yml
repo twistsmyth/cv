@@ -17,6 +17,8 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- checkout: self
+- checkout: space-invaders
 
 - task: Bash@3
   inputs:
@@ -31,7 +33,7 @@ steps:
       echo 'stage'
       ls $(Build.ArtifactStagingDirectory)
       mv $(build.sourcesDirectory)/space-invaders/index.html $(build.sourcesDirectory)/space-invaders/space.html
-      mv $(build.sourcesDirectory)/space-invaders/. $(build.sourcesDirectory)/cv
+      mv $(build.sourcesDirectory)/space-invaders/. $(build.sourcesDirectory)
 
 
 - task: UniversalPackages@0
