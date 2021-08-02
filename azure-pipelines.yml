@@ -34,7 +34,7 @@ steps:
     command: 'publish'
     publishDirectory: '$(Build.ArtifactStagingDirectory)'
     feedsToUsePublish: 'internal'
-    vstsFeedPublish: '1f99d44f-ae24-4ec7-b6dc-5d544f9d8d16'
+    vstsFeedPublish: '2deb107a-8cc7-4c49-82c5-da9958d9fd7b'
     vstsFeedPackagePublish: 'cv'
     versionOption: 'custom'
     versionPublish: '0.0.1'
