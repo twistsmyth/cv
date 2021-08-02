@@ -26,14 +26,12 @@ steps:
     script: |
       # scripted
       echo 'merge site'
-      echo 'current'
-      ls
-      echo 'source'
-      ls $(build.sourcesDirectory)
-      echo 'stage'
-      ls $(Build.ArtifactStagingDirectory)
+      echo 'this is space-invaders'
+      ls $(build.sourcesDirectory)/space-invaders
+      echo 'this is cv'
+      ls $(build.sourcesDirectory)/cv
       mv $(build.sourcesDirectory)/space-invaders/index.html $(build.sourcesDirectory)/space-invaders/space.html
-      mv $(build.sourcesDirectory)/space-invaders/. $(build.sourcesDirectory)
+      mv $(build.sourcesDirectory)/space-invaders/. $(build.sourcesDirectory)/cv
 
 
 - task: UniversalPackages@0
