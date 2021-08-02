@@ -1,0 +1,36 @@
+resources:
+  repositories:
+  - repository: cv
+    type: github
+    endpoint: twistsmyth
+    name: twistsmyth/cv
+  - repository: space-invaders
+    type: github
+    endpoint: twistsmyth
+    name: twistsmyth/space-invaders
+
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # scripted
+      echo 'merge site'
+      mv $(build.sourcesDirectory)/space-invaders/index.html $(build.sourcesDirectory)/space-invaders/space.html
+      mv $(build.sourcesDirectory)/space-invaders/. $(build.sourcesDirectory)/cv/. $(build.sourcesDirectory)/.
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'docker'
+    repository: 'twistsmyth/cv'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+
