@@ -24,6 +24,12 @@ steps:
     script: |
       # scripted
       echo 'merge site'
+      echo 'current'
+      ls
+      echo 'source'
+      ls $(build.sourcesDirectory)
+      echo 'stage'
+      ls $(Build.ArtifactStagingDirectory)
       mv $(build.sourcesDirectory)/space-invaders/index.html $(build.sourcesDirectory)/space-invaders/space.html
       mv $(build.sourcesDirectory)/space-invaders/. $(build.sourcesDirectory)/cv
 
