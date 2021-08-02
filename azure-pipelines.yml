@@ -27,7 +27,11 @@ steps:
       # scripted
       echo 'merge site'
       mv $(build.sourcesDirectory)/space-invaders/index.html $(build.sourcesDirectory)/space-invaders/space.html
-      cp -r $(build.sourcesDirectory)/space-invaders/. $(build.sourcesDirectory)/cv/. $(build.sourcesDirectory)
-      az artifacts universal publish --organization https://twistsmyth.visualstudio.com/ --feed twistsmyth --name cvw --version 0.0.2 --description "website" --path $(Build.ArtifactStagingDirectory)
+      cp -r $(build.sourcesDirectory)/space-invaders/. $(build.sourcesDirectory)/cv/. $(Build.ArtifactStagingDirectory)
 
-
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'cvw'
+    publishLocation: 'Container'
+    StoreAsTar: true
