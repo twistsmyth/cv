@@ -28,7 +28,6 @@ steps:
       echo 'merge site'
       mv $(build.sourcesDirectory)/space-invaders/index.html $(build.sourcesDirectory)/space-invaders/space.html
       cp -r $(build.sourcesDirectory)/space-invaders/. $(build.sourcesDirectory)/cv/. $(Build.ArtifactStagingDirectory)
-      ls $(Build.ArtifactStagingDirectory)
 
 - task: UniversalPackages@0
   inputs:
@@ -39,5 +38,7 @@ steps:
     vstsFeedPackagePublish: 'cv'
     versionOption: 'custom'
     versionPublish: '0.0.1'
+    packagePublishDescription: 'Website'
     publishedPackageVar: 'cv'
+
 
