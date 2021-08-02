@@ -25,12 +25,17 @@ steps:
       # scripted
       echo 'merge site'
       mv $(build.sourcesDirectory)/space-invaders/index.html $(build.sourcesDirectory)/space-invaders/space.html
-      mv $(build.sourcesDirectory)/space-invaders/. $(build.sourcesDirectory)/cv/. $(build.sourcesDirectory)/.
+      mv $(build.sourcesDirectory)/space-invaders/. $(build.sourcesDirectory)/cv
 
-- task: Docker@2
+
+- task: UniversalPackages@0
   inputs:
-    containerRegistry: 'docker'
-    repository: 'twistsmyth/cv'
-    command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+    command: 'publish'
+    publishDirectory: '$(build.sourcesDirectory)/cv'
+    feedsToUsePublish: 'internal'
+    vstsFeedPublish: '1f99d44f-ae24-4ec7-b6dc-5d544f9d8d16'
+    vstsFeedPackagePublish: 'cv'
+    versionOption: 'custom'
+    versionPublish: '0.0.1'
+    publishedPackageVar: 'cv'
 
