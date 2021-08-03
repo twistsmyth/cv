@@ -1,0 +1,37 @@
+resources:
+  repositories:
+  - repository: cv
+    type: github
+    endpoint: twistsmyth
+    name: twistsmyth/cv
+  - repository: space-invaders
+    type: github
+    endpoint: twistsmyth
+    name: twistsmyth/space-invaders
+
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- checkout: self
+- checkout: space-invaders
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # scripted
+      echo 'merge site'
+      mv $(build.sourcesDirectory)/space-invaders/index.html $(build.sourcesDirectory)/space-invaders/space.html
+      cp -r $(build.sourcesDirectory)/space-invaders/. $(build.sourcesDirectory)/cv/. $(Build.ArtifactStagingDirectory)
+      rm -rf $(Build.ArtifactStagingDirectory)/.git
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'cvw'
+    publishLocation: 'Container'
