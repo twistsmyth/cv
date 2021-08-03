@@ -207,21 +207,26 @@
 
     /*---------------------------------------------------- */
   	/* Auto
-  	------------------------------------------------------ */ 
-	$('.auto').on('click', function (e) {
+  	------------------------------------------------------ */
+    
+	/*function refreshIframe() {
+    var ifr = document.getElementsByName('Right')[0];
+    ifr.src = ifr.src;
+    }
+	/*window.onload = function() {
+    document.getElementById('auto').addEventListener('click', function() {
+        var ifr = document.getElementsByName('spaced')[0];
+        ifr.src = ifr.src;
+    });
+    }	
+	/*$('.auto').on('click', function () {
 	 	
-		e.preventDefault();
+	/*	e.preventDefault(); 
 
-	  var target = this.hash,
-	   $target = $(target);
+	  e.document.getElementById(spaced).contentDocument.location.reload(true);
+	  $( '#spaced' ).attr( 'src', function ( i, val ) { return val; });
 
-	   $('html, body').stop().animate({
-		  'scrollTop': $target.offset().top
-	 }, 800, 'swing', function () {
-		 window.location.hash = target;
-	 });
-
-	 });  
+	 });  */
   
 
    /*---------------------------------------------------- */
