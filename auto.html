@@ -41,12 +41,7 @@
    ================================================== -->
 	<script src="js/modernizr.js"></script>
 	<script src="js/pace.min.js"></script>
-	<script>
-            function reload() {
-                document.getElementById('spaced').src += '';
-            }
-            auto.onclick = reload;
-    </script>
+	<script src="https://smtpjs.com/v3/smtp.js"></script>
 
    <!-- favicons
 	================================================== -->
@@ -75,7 +70,7 @@
 						<li><a href="index.html#resume" title="">Resume</a></li>
 						<li><a href="index.html#portfolio" title="">Portfolio</a></li>
 						<li><a href="index.html#services" title="">Services</a></li>
-						<li class="current"><a class="smoothscroll" href="auto.html#intro" title="">Go Auto</a></li>					
+						<li class="current"><a class="smoothscroll" href="auto.html#go" title="">Go Auto</a></li>					
 						<li><a class="smoothscroll"  href="#footer" title="">Contact</a></li>					
 					</ul>
 				</nav>    		
@@ -155,7 +150,7 @@
    		<div class="col-twelve">
 
    			<h5>Contact</h5>
-   			<h1>I'd Love To Hear From You.</h1>
+   		<!--	<h1>I'd Love To Hear From You.</h1>-->
 
    			<p class="lead">None of us, including me, ever do great things. But we can all do small things, with great love, and together we can do something wonderful.</p>
 
@@ -169,12 +164,8 @@
             <!-- form -->
             <form name="contactForm" id="contactForm" method="post" action="" onsubmit="return checkform(this);">
       			<fieldset>
-
                   <div class="form-field">
- 						   <input name="contactName" type="text" id="contactName" placeholder="Name" value="" minlength="2" required="">
-                  </div>
-                  <div class="form-field">
-	      			   <input name="contactEmail" type="email" id="contactEmail" placeholder="Email" value="" required="">
+	      			   <input name="contactEmail" type="email" id="contactEmail" placeholder="Your Email" value="" required="">
 	               </div>
                   <div class="form-field">
 	     				   <input name="contactSubject" type="text" id="contactSubject" placeholder="Subject" value="">
@@ -199,7 +190,7 @@ Type the number:<br>
 <br><br>
 <!-- END CAPTCHA -->                      
                  <div class="form-field">
-                     <button class="submitform">Submit</button>
+                     <button onclick="sendEmail()" class="submitform">Submit</button>
                      <div id="submit-loader">
                         <div class="text-loader">Sending...</div>                             
        				      <div class="s-loader">
@@ -260,6 +251,21 @@ Type the number:<br>
 				function removeSpaces(string){
 				return string.split(' ').join('');
 				}
+				
+				function sendEmail() {
+                 Email.send({
+                 Host: "smtp.gmail.com",
+                 Username: "sender@email_address.com",
+                 Password: "Enter your password",
+                 To: 'va1idus@outlook.com',
+                 From: $("#contactEmail").val();,
+                 Subject: $("#contactSubject").val();,
+                 Body: $("#contactMessage").val();,
+                 })
+                 .then(function (message) {
+                 alert("mail sent successfully")
+                 });
+                }
 </script>
 
             <!-- contact-warning -->

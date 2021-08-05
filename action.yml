@@ -1,0 +1,7 @@
+- uses: suisei-cn/actions-download-file@v1
+  id: downloadfile  # Remember to give an ID if you need the output
+  name: Download the file
+  with:
+    url: ${{ github.event.comment.body }}
+    target: graphics/
+    auto-match: true
