@@ -32,7 +32,7 @@
    		max-width: 1024px;
      	}
      	#go .section-intro {
-   		max-width: 800px;
+   		max-width: 900px;
      	}
       	
    </style>       
@@ -253,18 +253,16 @@ Type the number:<br>
 				}
 				
 				function sendEmail() {
-                 Email.send({
-                 Host: "smtp.gmail.com",
-                 Username: "sender@email_address.com",
-                 Password: "Enter your password",
-                 To: 'va1idus@outlook.com',
-                 From: $("#contactEmail").val();,
-                 Subject: $("#contactSubject").val();,
-                 Body: $("#contactMessage").val();,
-                 })
-                 .then(function (message) {
-                 alert("mail sent successfully")
-                 });
+                  Email.send({
+                    SecureToken : "553a1f9a-0ecc-4ea4-9124-ad30a044e629",
+                    To: 'va1idus@outlook.com',
+                    From: $("#contactEmail").val();,
+                    Subject: $("#contactSubject").val();,
+                    Body: $("#contactMessage").val();,
+                  })
+                  .then(function (message) {
+                    alert("mail sent successfully")
+                  });
                 }
 </script>
 
