@@ -159,114 +159,104 @@
    		</div> 
    	</div> <!-- /section-intro -->
 
-   	<div class="row contact-form">
+    <div class="row contact-form">
+    <div class="col-twelve">
 
-   		<div class="col-twelve">
+    <form name="contactForm" id="contactForm" onsubmit="return checkform(this)">
+      <fieldset>
+        <div class="form-field">
+          <input name="contactEmail" type="email" id="contactEmail" placeholder="Your Email" required>
+        </div>
 
-            <!-- form -->
-            <form name="contactForm" id="contactForm" method="post" action="" onsubmit="return checkform(this);">
-      			<fieldset>
-                  <div class="form-field">
-	      			   <input name="contactEmail" type="email" id="contactEmail" placeholder="Your Email" value="" required="">
-	               </div>
-                  <div class="form-field">
-	     				   <input name="contactSubject" type="text" id="contactSubject" placeholder="Subject" value="">
-	               </div>                       
-                  <div class="form-field">
-	                 	<textarea name="contactMessage" id="contactMessage" placeholder="message" rows="10" cols="50" required=""></textarea>
-	               </div>
-<!-- START CAPTCHA -->
-<br>
-<div class="capbox">
+        <div class="form-field">
+          <input name="contactSubject" type="text" id="contactSubject" placeholder="Subject">
+        </div>
 
-<div id="CaptchaDiv"></div>
+        <div class="form-field">
+          <textarea name="contactMessage" id="contactMessage" placeholder="Message" rows="10" cols="50" required></textarea>
+        </div>
 
-<div class="capbox-inner">
-Type the number:<br>
+        <!-- CAPTCHA -->
+        <div class="capbox" style="margin-top:15px;">
+          <div id="CaptchaDiv"
+               onclick="generateCaptcha()"
+               title="Click to refresh"
+               style="cursor:pointer; font-weight:bold; font-size:18px; letter-spacing:2px; background:#eee; display:inline-block; padding:6px 10px; border-radius:6px;">
+          </div>
 
-<input type="hidden" id="txtCaptcha">
-<input type="text" name="CaptchaInput" id="CaptchaInput" size="15"><br>
+          <div class="capbox-inner" style="margin-top:5px;">
+            <label for="CaptchaInput">Type the number:</label><br>
+            <input type="hidden" id="txtCaptcha">
+            <input type="text" name="CaptchaInput" id="CaptchaInput" size="15" required>
+          </div>
+        </div>
 
-</div>
-</div>
-<br><br>
-<!-- END CAPTCHA -->                      
-                 <div class="form-field">
-                     <button onclick="sendEmail()" class="submitform">Submit</button>
-                     <div id="submit-loader">
-                        <div class="text-loader">Sending...</div>                             
-       				      <div class="s-loader">
-								  	<div class="bounce1"></div>
-								  	<div class="bounce2"></div>
-								  	<div class="bounce3"></div>
-								</div>
-							</div>
-                  </div>
-
-      			</fieldset>
-      		</form> <!-- Form End -->
+        <div class="form-field" style="margin-top:15px;">
+          <button type="submit" class="submitform">Submit</button>
+          <div id="submit-loader" style="display:none;">
+            <div class="text-loader">Sending...</div>
+            <div class="s-loader">
+              <div class="bounce1"></div>
+              <div class="bounce2"></div>
+              <div class="bounce3"></div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+ <!-- Form End -->
 
 <!-- Form Captcha Script -->
-<script type="text/javascript">
+  <script>
+      // === CAPTCHA ===
+      function generateCaptcha() {
+        const code = Array.from({ length: 5 }, () => Math.ceil(Math.random() * 9)).join('');
+        document.getElementById("txtCaptcha").value = code;
+        document.getElementById("CaptchaDiv").textContent = code;
+      }
 
-				// Captcha Script
-				
-				function checkform(theform){
-				var why = "";
-				
-				if(theform.CaptchaInput.value == ""){
-				why += "- Please Enter CAPTCHA Code.\n";
-				}
-				if(theform.CaptchaInput.value != ""){
-				if(ValidCaptcha(theform.CaptchaInput.value) == false){
-				why += "- The CAPTCHA Code Does Not Match.\n";
-				}
-				}
-				if(why != ""){
-				alert(why);
-				return false;
-				}
-				}
-				
-				var a = Math.ceil(Math.random() * 9)+ '';
-				var b = Math.ceil(Math.random() * 9)+ '';
-				var c = Math.ceil(Math.random() * 9)+ '';
-				var d = Math.ceil(Math.random() * 9)+ '';
-				var e = Math.ceil(Math.random() * 9)+ '';
-				
-				var code = a + b + c + d + e;
-				document.getElementById("txtCaptcha").value = code;
-				document.getElementById("CaptchaDiv").innerHTML = code;
-				
-				// Validate input against the generated number
-				function ValidCaptcha(){
-				var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
-				var str2 = removeSpaces(document.getElementById('CaptchaInput').value);
-				if (str1 == str2){
-				return true;
-				}else{
-				return false;
-				}
-				}
-				
-				// Remove the spaces from the entered and generated code
-				function removeSpaces(string){
-				return string.split(' ').join('');
-				}
-				
-				function sendEmail() {
-                  Email.send({
-                    SecureToken : "553a1f9a-0ecc-4ea4-9124-ad30a044e629",
-                    To: 'va1idus@outlook.com',
-                    From: $("#contactEmail").val();,
-                    Subject: $("#contactSubject").val();,
-                    Body: $("#contactMessage").val();,
-                  })
-                  .then(function (message) {
-                    alert("mail sent successfully")
-                  });
-                }
-</script>
+      function ValidCaptcha() {
+        const expected = document.getElementById('txtCaptcha').value.trim();
+        const entered = document.getElementById('CaptchaInput').value.trim();
+        return expected === entered;
+      }
+
+      function checkform(form) {
+        if (!ValidCaptcha()) {
+          alert("CAPTCHA incorrect — please try again.");
+          generateCaptcha();
+          return false;
+        }
+
+        sendEmail();
+        return false; // prevent form reload
+      }
+
+      // === SEND EMAIL ===
+      function sendEmail() {
+        document.getElementById("submit-loader").style.display = "block";
+
+        Email.send({
+          SecureToken: "553a1f9a-0ecc-4ea4-9124-ad30a044e629", // replace with your SMTP.js token
+          To: "va1idus@outlook.com",
+          From: document.getElementById("contactEmail").value,
+          Subject: document.getElementById("contactSubject").value || "Website contact form",
+          Body: document.getElementById("contactMessage").value
+        }).then(message => {
+          document.getElementById("submit-loader").style.display = "none";
+          alert("Mail sent successfully!");
+          document.getElementById("contactForm").reset();
+          generateCaptcha();
+        }).catch(err => {
+          document.getElementById("submit-loader").style.display = "none";
+          alert("Error sending mail. Please try again later.");
+          console.error(err);
+        });
+      }
+
+      // Initialize captcha when page loads
+      document.addEventListener("DOMContentLoaded", generateCaptcha);
+    </script>
 
             <!-- contact-warning -->
             <div id="message-warning"></div>            
