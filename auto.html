@@ -139,101 +139,45 @@
     </div>
 
     <div class="row contact-form">
-      <div class="col-twelve">
-        <form name="contactForm" id="contactForm" onsubmit="return checkform(this)">
-          <fieldset>
-            <div class="form-field">
-              <input name="contactEmail" type="email" id="contactEmail" placeholder="Your Email" required>
+  <div class="col-twelve">
+    <form id="contactForm" method="POST" action="https://formspree.io/f/mykrzyay">
+      <fieldset>
+        <div class="form-field">
+          <input name="name" type="text" id="contactName" placeholder="Name" minlength="2" required>
+        </div>
+        <div class="form-field">
+          <input name="email" type="email" id="contactEmail" placeholder="Email" required>
+        </div>
+        <div class="form-field">
+          <input name="subject" type="text" id="contactSubject" placeholder="Subject">
+        </div>
+        <div class="form-field">
+          <textarea name="message" id="contactMessage" placeholder="Message" rows="10" cols="50" required></textarea>
+        </div>
+
+        <!-- honeypot spam trap: real users never fill this in -->
+        <input type="text" name="_gotcha" style="display:none">
+
+        <div class="form-field">
+          <button class="submitform" type="submit">Submit</button>
+          <div id="submit-loader" style="display:none">
+            <div class="text-loader">Sending...</div>
+            <div class="s-loader">
+              <div class="bounce1"></div>
+              <div class="bounce2"></div>
+              <div class="bounce3"></div>
             </div>
+          </div>
+        </div>
+      </fieldset>
+    </form>
 
-            <div class="form-field">
-              <input name="contactSubject" type="text" id="contactSubject" placeholder="Subject">
-            </div>
-
-            <div class="form-field">
-              <textarea name="contactMessage" id="contactMessage" placeholder="Message" rows="10" cols="50" required></textarea>
-            </div>
-
-            <!-- CAPTCHA -->
-            <div class="capbox" style="margin-top:15px;">
-              <div id="CaptchaDiv"
-                  onclick="generateCaptcha()"
-                  title="Click to refresh"
-                  style="cursor:pointer; font-weight:bold; font-size:18px; letter-spacing:2px; background:#eee; display:inline-block; padding:6px 10px; border-radius:6px;">
-              </div>
-
-              <div class="capbox-inner" style="margin-top:5px;">
-                <label for="CaptchaInput">Type the number:</label><br>
-                <input type="hidden" id="txtCaptcha">
-                <input type="text" name="CaptchaInput" id="CaptchaInput" size="15" required>
-              </div>
-            </div>
-
-            <div class="form-field" style="margin-top:15px;">
-              <button type="submit" class="submitform">Submit</button>
-              <div id="submit-loader" style="display:none;">
-                <div class="text-loader">Sending...</div>
-                <div class="s-loader">
-                  <div class="bounce1"></div>
-                  <div class="bounce2"></div>
-                  <div class="bounce3"></div>
-                </div>
-              </div>
-            </div>
-          </fieldset>
-        </form>
-
-        <script>
-          // === CAPTCHA ===
-          function generateCaptcha() {
-            const code = Array.from({ length: 5 }, () => Math.ceil(Math.random() * 9)).join('');
-            document.getElementById("txtCaptcha").value = code;
-            document.getElementById("CaptchaDiv").textContent = code;
-          }
-
-          function ValidCaptcha() {
-            const expected = document.getElementById('txtCaptcha').value.trim();
-            const entered = document.getElementById('CaptchaInput').value.trim();
-            return expected === entered;
-          }
-
-          function checkform(form) {
-            if (!ValidCaptcha()) {
-              alert("CAPTCHA incorrect — please try again.");
-              generateCaptcha();
-              return false;
-            }
-
-            sendEmail();
-            return false; // prevent reload
-          }
-
-          // === SEND EMAIL ===
-          function sendEmail() {
-            document.getElementById("submit-loader").style.display = "block";
-
-            Email.send({
-              SecureToken: "553a1f9a-0ecc-4ea4-9124-ad30a044e629", // replace with your SMTP.js token
-              To: "va1idus@outlook.com",
-              From: document.getElementById("contactEmail").value,
-              Subject: document.getElementById("contactSubject").value || "Website contact form",
-              Body: document.getElementById("contactMessage").value
-            }).then(() => {
-              document.getElementById("submit-loader").style.display = "none";
-              alert("Mail sent successfully!");
-              document.getElementById("contactForm").reset();
-              generateCaptcha();
-            }).catch(err => {
-              document.getElementById("submit-loader").style.display = "none";
-              alert("Error sending mail. Please try again later.");
-              console.error(err);
-            });
-          }
-
-          document.addEventListener("DOMContentLoaded", generateCaptcha);
-        </script>
-      </div>
+    <div id="message-warning"></div>
+    <div id="message-success" style="display:none">
+      <i class="fa fa-check"></i>Your message was sent, thank you!<br>
     </div>
+  </div>
+</div>
   </section>
    <!-- footer
    ==================================================

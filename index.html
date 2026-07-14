@@ -209,8 +209,8 @@
 				   </li>
 				   <li>
 
-				   	<div class="progress percent45"><span>45%</span></div>
-				   	<strong>Rust</strong>
+				   	<div class="progress percent45"><span>65%</span></div>
+				   	<strong>AI</strong>
 				   </li>
       
 				</ul> <!-- /skill-bars -->	
@@ -515,13 +515,13 @@
 
 	        		<div class="bgrid folio-item">
 	               <div class="item-wrap">
-	               	<img src="images/portfolio/clouds.jpg" alt="Clouds">
+	               	<img src="images/portfolio/ai.jpg" alt="digitu">
 	               	<a href="#modal-02" class="overlay">              		                  
 	                     <div class="folio-item-table">
 	                     	<div class="folio-item-cell">
-	                     		<h3 class="folio-title">Dreaming</h3>	     					    
+	                     		<h3 class="folio-title">Digitu.net</h3>	     					    
 		     					    	<span class="folio-types">
-		     					       	  More Soon
+		     					       	  AI
 		     					      </span>		     		
 		     					   </div> 	                      	
 	                     </div>                    
@@ -618,18 +618,18 @@
 				   <div id="modal-02" class="popup-modal slider mfp-hide">	
 
 				     	<div class="media">
-				     		<img src="images/portfolio/modals/m-clouds.jpg" alt="" />
+				     		<img src="images/portfolio/modals/m-digi.jpg" alt="" />
 				     	</div>      	
 
 					   <div class="description-box">
-					      <h4>Dreaming</h4>		      
-					      <p>Up the next big thing</p>
+					      <h4>Digitu</h4>		      
+					      <p>Digitu is an AI-powered, decentralised Progressive Web App distribution platform built for every language and region. Our mission is a minimal, open internet — accessible to all of humanity</p>
 
-					      <div class="categories">More Soon</div>			               
+					      <div class="categories">Decentralised AI</div>			               
 					   </div>
 
 			         <div class="link-box">
-			            <a href="#">Details</a>
+			            <a href="https://digitu.net">Details</a>
 					      <a href="#" class="popup-modal-dismiss">Close</a>
 			         </div>		      
 
@@ -966,167 +966,46 @@
    		</div> 
    	</div> <!-- /section-intro -->
 
-   	<div class="row contact-form">
+   <div class="row contact-form">
+  <div class="col-twelve">
+    <form id="contactForm" method="POST" action="https://formspree.io/f/mykrzyay">
+      <fieldset>
+        <div class="form-field">
+          <input name="name" type="text" id="contactName" placeholder="Name" minlength="2" required>
+        </div>
+        <div class="form-field">
+          <input name="email" type="email" id="contactEmail" placeholder="Email" required>
+        </div>
+        <div class="form-field">
+          <input name="subject" type="text" id="contactSubject" placeholder="Subject">
+        </div>
+        <div class="form-field">
+          <textarea name="message" id="contactMessage" placeholder="Message" rows="10" cols="50" required></textarea>
+        </div>
 
-   		<div class="col-twelve">
+        <!-- honeypot spam trap: real users never fill this in -->
+        <input type="text" name="_gotcha" style="display:none">
 
-            <!-- form -->
-            <form name="contactForm" id="contactForm" method="post" action="">
-      			<fieldset>
+        <div class="form-field">
+          <button class="submitform" type="submit">Submit</button>
+          <div id="submit-loader" style="display:none">
+            <div class="text-loader">Sending...</div>
+            <div class="s-loader">
+              <div class="bounce1"></div>
+              <div class="bounce2"></div>
+              <div class="bounce3"></div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </form>
 
-                  <div class="form-field">
- 						   <input name="contactName" type="text" id="contactName" placeholder="Name" value="" minlength="2" required="">
-                  </div>
-                  <div class="form-field">
-	      			   <input name="contactEmail" type="email" id="contactEmail" placeholder="Email" value="" required="">
-	               </div>
-                  <div class="form-field">
-	     				   <input name="contactSubject" type="text" id="contactSubject" placeholder="Subject" value="">
-	               </div>                       
-                  <div class="form-field">
-	                 	<textarea name="contactMessage" id="contactMessage" placeholder="message" rows="10" cols="50" required=""></textarea>
-	              </div>
-<!-- START CAPTCHA -->
-<br>
-<div class="capbox">
-
-<div id="CaptchaDiv"></div>
-
-<div class="capbox-inner">
-Type the number:<br>
-
-<input type="hidden" id="txtCaptcha">
-<input type="text" name="CaptchaInput" id="CaptchaInput" size="15"><br>
-
+    <div id="message-warning"></div>
+    <div id="message-success" style="display:none">
+      <i class="fa fa-check"></i>Your message was sent, thank you!<br>
+    </div>
+  </div>
 </div>
-</div>
-<br><br>
-<!-- END CAPTCHA -->                       
-                 <div class="form-field">
-                     <button class="submitform">Submit</button>
-                     <div id="submit-loader">
-                        <div class="text-loader">Sending...</div>                             
-       				      <div class="s-loader">
-								  	<div class="bounce1"></div>
-								  	<div class="bounce2"></div>
-								  	<div class="bounce3"></div>
-								</div>
-							</div>
-                  </div>
-
-      			</fieldset>
-      		</form> <!-- Form End -->
-
-<!-- Form Captcha Script -->
-<script type="text/javascript">
-
-	// Captcha Script
-	
-	function checkform(theform){
-	var why = "";
-	
-	if(theform.CaptchaInput.value == ""){
-	why += "- Please Enter CAPTCHA Code.\n";
-	}
-	if(theform.CaptchaInput.value != ""){
-	if(ValidCaptcha(theform.CaptchaInput.value) == false){
-	why += "- The CAPTCHA Code Does Not Match.\n";
-	}
-	}
-	if(why != ""){
-	alert(why);
-	return false;
-	}
-	}
-	
-	var a = Math.ceil(Math.random() * 9)+ '';
-	var b = Math.ceil(Math.random() * 9)+ '';
-	var c = Math.ceil(Math.random() * 9)+ '';
-	var d = Math.ceil(Math.random() * 9)+ '';
-	var e = Math.ceil(Math.random() * 9)+ '';
-	
-	var code = a + b + c + d + e;
-	document.getElementById("txtCaptcha").value = code;
-	document.getElementById("CaptchaDiv").innerHTML = code;
-	
-	// Validate input against the generated number
-	function ValidCaptcha(){
-	var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
-	var str2 = removeSpaces(document.getElementById('CaptchaInput').value);
-	if (str1 == str2){
-	return true;
-	}else{
-	return false;
-	}
-	}
-	
-	// Remove the spaces from the entered and generated code
-	function removeSpaces(string){
-	return string.split(' ').join('');
-	}
-</script>
-
-            <!-- contact-warning -->
-            <div id="message-warning">            	
-            </div>            
-            <!-- contact-success -->
-      		<div id="message-success">
-               <i class="fa fa-check"></i>Your message was sent, thank you!<br>
-      		</div>
-
-         </div> <!-- /col-twelve -->
-   		
-   	</div> <!-- /contact-form -->
-
-   	<!--<div class="row contact-info">
-
-   		<div class="col-four tab-full">
-
-   			<div class="icon">
-   				<i class="icon-pin"></i>
-   			</div>
-
-   			<h5>Where to find me</h5>
-
-   			<p>
-            <br>
-            <br>
-            
-            </p>
-
-   		</div>
-
-   		<div class="col-four tab-full collapse">
-
-   			<div class="icon">
-   				<i class="icon-mail"></i>
-   			</div>
-
-   			<h5>Email Me At</h5>
-
-   			<p>twistsmyth@outlook.com<br>
-			   				     
-			   </p>
-
-   		</div>
-
-   		<div class="col-four tab-full">
-
-   			<div class="icon">
-   				<i class="icon-phone"></i>
-   			</div>
-
-   			<h5></h5>
-
-   			<p>
-			   </p>
-
-   		</div>-->
-   		
-   	</div> <!-- /contact-info -->
-		
-	</section> <!-- /contact -->
-
 
    <!-- footer
    ================================================== -->
