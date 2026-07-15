@@ -39,7 +39,6 @@
    ================================================== -->
 	<script src="js/modernizr.js"></script>
 	<script src="js/pace.min.js"></script>
-	<script src="https://smtpjs.com/v3/smtp.js"></script>
 	<script src="https://cdn.passwordless.dev/dist/1.1.0/umd/passwordless.umd.min.js" crossorigin="anonymous"></script>
 
    <!-- favicons
@@ -158,6 +157,11 @@
         <!-- honeypot spam trap: real users never fill this in -->
         <input type="text" name="_gotcha" style="display:none">
 
+        <!-- reCAPTCHA v2 
+        <div class="form-field">
+          <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY_HERE"></div>
+        </div>-->
+
         <div class="form-field">
           <button class="submitform" type="submit">Submit</button>
           <div id="submit-loader" style="display:none">
@@ -219,6 +223,19 @@
    <script src="js/jquery-2.1.3.min.js"></script>
    <script src="js/plugins.js"></script>
    <script src="js/main.js"></script>
+   <script>
+  		window.formspree =
+    		window.formspree ||
+    		function () {
+      		(formspree.q = formspree.q || []).push(arguments);
+    		};
+  		formspree("initForm", {
+    		formElement: "#contactForm",
+    		formId: "mykrzyay",
+  		});
+	 </script>
+	 <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+   <!--<script src="https://www.google.com/recaptcha/api.js" async defer></script> -->
 
 </body>
 
